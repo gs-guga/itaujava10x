@@ -1,0 +1,13 @@
+
+estatistica:
+  segundos: 60
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
