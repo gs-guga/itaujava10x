@@ -57,5 +57,5 @@ jobs:
           context: .
           push: true
           tags: |
-            devcarvalho0/itaujava10x:latest
-            devcarvalho0/itaujava10x:${{ github.sha }}
+            devcarvalh0/itaujava10x:latest
+            devcarvalh0/itaujava10x:${{ github.sha }}
