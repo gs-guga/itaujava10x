@@ -28,16 +28,27 @@ public class EstatisticasController implements EstatisticasControllerDoc {
         this.transacaoRepository = transacaoRepository;
     }
 
+
     @Override
     @GetMapping
     public ResponseEntity<EstatisticaDTO> estatisticas() {
 
-        log.info("Calculando estatisticas a " + this.estatisticaConfig.toString() + " segundos ");
+        log.info("Calculando estatisticas a {} segundos",
+                this.estatisticaConfig.segundos());
 
         final var horaAtual = OffsetDateTime.now()
                 .minusSeconds(estatisticaConfig.segundos());
 
-        return   ResponseEntity.ok(
-                transacaoRepository.estatistica(horaAtual));
+        long inicio = System.nanoTime();
+
+        EstatisticaDTO estatistica =
+                transacaoRepository.estatistica(horaAtual);
+
+        long duracao = System.nanoTime() - inicio;
+
+        log.info("Tempo de cálculo das estatísticas: {} ms",
+                duracao / 1_000_000.0);
+
+        return ResponseEntity.ok(estatistica);
     }
 }
